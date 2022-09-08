@@ -3,7 +3,7 @@
 int calcularDivisiones(int numero1, int numero2, int * resultado){
 	int retorno = -1;
 
-	if(numero2 != 0){
+	if(resultado != NULL && numero2 != 0){
 		*resultado = numero1 / numero2;
 		retorno = 0;
 	}

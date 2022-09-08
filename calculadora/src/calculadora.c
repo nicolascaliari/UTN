@@ -35,11 +35,11 @@ int main(void) {
 
 	switch (operador) {
 	case '/':
-
-		if (respuesta == -1) {
-			printf("No se puede dividir por cero");
+		respuesta = calcularDivisiones(numeroUno, numeroDos, &resultado);
+		if (respuesta == 0) {
+			printf("%d", resultado);
 		} else {
-			respuesta = calcularDivisiones(numeroUno, numeroDos, &resultado);
+			printf("No se puede dividir por cero \n");
 		}
 		break;
 
@@ -56,6 +56,6 @@ int main(void) {
 		break;
 	}
 
-	printf("%d", resultado);
+//	printf("%d", resultado);
 	return EXIT_SUCCESS;
 }

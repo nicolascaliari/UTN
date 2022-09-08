@@ -12,5 +12,6 @@
 int pedirEntero(void);
 int calcularPromedio(numeroUno, numeroDos);
 int verificarRetorno(int numeroEntero);
+int ingresarDiezNumeros();
 
 #endif /* BIBLIOTECA_H_ */

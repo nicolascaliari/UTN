@@ -18,12 +18,14 @@ int main(void) {
 int resultadoEntero;
 int resultadoPromedio;
 int resultadoVerificarEntero;
+int resultadoDiezNumeros;
 int retorno;
 
 resultadoEntero = pedirEntero();
 resultadoPromedio = calcularPromedio(20, 30);
 
 resultadoVerificarEntero = verificarRetorno(4);
+resultadoDiezNumeros = ingresarDiezNumeros();
 
 if(resultadoVerificarEntero > 0){
 	retorno = 1;
@@ -39,6 +41,7 @@ if(resultadoVerificarEntero > 0){
 printf("\n %d", resultadoEntero);
 printf("\n %d" , resultadoPromedio);
 printf("\n %d", retorno);
+printf("\n %d", resultadoDiezNumeros);
 
 	return EXIT_SUCCESS;
 }
