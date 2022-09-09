@@ -21,33 +21,35 @@ Listado de los números de las posiciones impares.
 #include "recorrerArray.h"
 
 
-#define valor 10
+#define len 10
 int main(void) {
+	setbuf(stdout , NULL);
 
 	int i;
-//	int numeros[valor];
-	int numeros;
+	int numeros[len];
 	int cantidadPositivos = 0;
 	int cantidadNegativos = 0;
 	int sumarPares = 0;
 	int imparMaximo;
 	int flag;
-	int retornoArray;
+
 
 
 	flag = 0;
 
 
-	for(i=0; i < valor ; i++){
+	for(i=0; i < len ; i++){
 		printf("Ingrese un numero: ");
-		scanf("%d", &numeros);
-		while(numeros < -1000 || numeros > 1000){
+		scanf("%d", &numeros[i]);
+		fflush(stdin);
+		while(numeros < -100 || numeros > 100){
 			printf("ERROR, Ingrese un numero: ");
-			scanf("%d", &numeros);
+			scanf("%d", &numeros[i]);
+			fflush(stdin);
 		}
 
 
-		retornoArray = recorrerArray(numeros);
+		recorrerArray(numeros[i], len);
 
 	if(numeros > 0){
 		cantidadPositivos++;
@@ -67,7 +69,13 @@ int main(void) {
 	printf("La cantidad de negativos es: %d \n",cantidadNegativos);
 	printf("La suma de los pares es: %d \n", sumarPares);
 	printf("El impar maximo es: %d \n" , imparMaximo);
-	printf("%d" , numeros);
+
 	return EXIT_SUCCESS;
 }
+
+
+
+
+
+
 

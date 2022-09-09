@@ -1,12 +1,13 @@
+#include <stdio.h>
+#include <stdlib.h>
 
-
-int recorrerArray(int ENTEROS[]){
+void recorrerArray(int ENTEROS[], int len){
 	int i;
-	int numeros;
-	for(i=0;i<ENTEROS;i++)
+
+	for(i=0; i < len ;i++)
 	{
-		ENTEROS[i]=numeros;
+		printf("%d",ENTEROS[i]);
 	}
-	printf(ENTEROS[i]);
+
 }
 

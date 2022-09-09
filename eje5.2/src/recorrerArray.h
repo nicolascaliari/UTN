@@ -8,6 +8,6 @@
 #ifndef RECORRERARRAY_H_
 #define RECORRERARRAY_H_
 
-int recorrerArray(int ENTEROS[]);
+void recorrerArray(int ENTEROS[], int len);
 
 #endif /* RECORRERARRAY_H_ */
