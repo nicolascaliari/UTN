@@ -9,5 +9,7 @@
 #define RECORRERARRAY_H_
 
 void recorrerArray(int ENTEROS[], int len);
+void arrayPares(int array[], int len);
+void arrayIndicesImpares(int array[], int len);
 
 #endif /* RECORRERARRAY_H_ */

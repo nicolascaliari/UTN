@@ -23,7 +23,7 @@ Listado de los números de las posiciones impares.
 
 #define len 10
 int main(void) {
-	setbuf(stdout , NULL);
+
 
 	int i;
 	int numeros[len];
@@ -41,30 +41,31 @@ int main(void) {
 	for(i=0; i < len ; i++){
 		printf("Ingrese un numero: ");
 		scanf("%d", &numeros[i]);
-		fflush(stdin);
-		while(numeros < -100 || numeros > 100){
+
+		while(numeros[i] < -1000 || numeros[i] > 1000){
 			printf("ERROR, Ingrese un numero: ");
 			scanf("%d", &numeros[i]);
-			fflush(stdin);
+
 		}
 
-
-		recorrerArray(numeros[i], len);
-
-	if(numeros > 0){
+	if(numeros[i] > 0){
 		cantidadPositivos++;
 	}else {
 		cantidadNegativos++;
 	}
 
-	if(numeros % 2 == 0){
-		sumarPares+=numeros;
-	}else if(imparMaximo < numeros || flag == 0){
-		imparMaximo = numeros;
+	if(numeros[i] % 2 == 0){
+		sumarPares+=numeros[i];
+	}else if(imparMaximo < numeros[i] || flag == 0){
+		imparMaximo = numeros[i];
 		flag =1;
 	}
 
+
 	}
+	recorrerArray(numeros , len);
+	arrayPares(numeros, len);
+	arrayIndicesImpares(numeros,len);
 	printf("La cantidad de positivos es: %d \n", cantidadPositivos);
 	printf("La cantidad de negativos es: %d \n",cantidadNegativos);
 	printf("La suma de los pares es: %d \n", sumarPares);
@@ -72,6 +73,7 @@ int main(void) {
 
 	return EXIT_SUCCESS;
 }
+
 
 
 
