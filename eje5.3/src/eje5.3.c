@@ -57,9 +57,17 @@ int main(void) {
 
 	   }
 	resultadoAntecesor = acumuladorNegativos - menorNegativo;
-	promedio = acc / contador ;
-	printf("El promedio de los positivos es: %d" , promedio);
-	printf("La suma de los antecesores es: %d", resultadoAntecesor);
+	if(contador != 0)
+	{
+		promedio = acc / contador;
+		printf("El promedio de los positivos es: %d \n" , promedio);
+	}else
+	{
+		printf("No ingresaste ningun positivo \n");
+	}
+
+
+	printf("La suma de los antecesores es: %d \n", resultadoAntecesor);
 
 	return EXIT_SUCCESS;
 }
