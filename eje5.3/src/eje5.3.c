@@ -16,21 +16,50 @@ void arrayAleatorio(int array[]);
 int main(void) {
 
 	int numeros[len];
+	int promedio;
+	int acc = 0;
+	int contador = 0;
+	int flag;
+	int menorNegativo;
+	int acumuladorNegativos = 0;
+	int resultadoAntecesor;
+
+	flag = 0;
 
 	InicializarVector(numeros, len, 0);
 	arrayAleatorio(numeros);
-
-
-	printf("La lista de numeros es: \n");
 
 	for(int i=0; i<len; i++)
 	    {
 	        if(numeros[i]!=0)
 	        {
-	             printf("%d\n", numeros[i]);
+	             	 if(numeros[i] > 0)
+	             	 {
+	             		 contador++;
+	             	 	 acc+=numeros[i];
+	             	 }else
+	             	 {
+	             		 acumuladorNegativos+= numeros[i];
+
+	             	 if(flag == 0)
+	             	 {
+	             		 menorNegativo = numeros[i];
+	             		 flag =1;
+	             	 }else
+	             	 {
+	             		if(menorNegativo < numeros[i])
+	             		{
+	             			 menorNegativo = numeros[i];
+	             		}
+	             	 }
+	             }
 	        }
 
-	    }
+	   }
+	resultadoAntecesor = acumuladorNegativos - menorNegativo;
+	promedio = acc / contador ;
+	printf("El promedio de los positivos es: %d" , promedio);
+	printf("La suma de los antecesores es: %d", resultadoAntecesor);
 
 	return EXIT_SUCCESS;
 }
