@@ -149,6 +149,7 @@ void calcularPromedio(int * array){
 	}
 
 	promedio = acc / 5;
-	printf("El promedio es:  %.2f\n",promedio);
+//	printf("El promedio es:  %.2f\n",promedio);
+
 
 }
