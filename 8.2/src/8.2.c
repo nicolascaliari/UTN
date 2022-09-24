@@ -11,13 +11,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "validacion.h"
+
+#include "calculos.h"
 
 
 
 
 int main(void) {
-	apple products[2];
+	products apple[2];
 	int option = 0;
 
 	do{
@@ -38,7 +39,7 @@ int main(void) {
 		printf("\n Selecciono ALTA Producto: \n \n");
 
 
-		loadProduct(products);
+		loadProduct(apple, 2);
 		break;
 	case 2:
 		printf("\n \n Selecciono BAJA Producto:  \n \n");

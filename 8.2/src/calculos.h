@@ -5,8 +5,8 @@
  *      Author: nicolas
  */
 
-#ifndef VALIDACION_H_
-#define VALIDACION_H_
+#ifndef CALCULOS_H_
+#define CALCULOS_H_
 typedef struct{
 	int idProduct;
 	char description[20];
@@ -14,10 +14,10 @@ typedef struct{
 	int type;
 	float price;
 	int isEmpty;
-}apple;
+}products;
 
-void loadProduct(apple products[]);
+void loadProduct(products apple[], int len);
 
 
 
-#endif /* VALIDACION_H_ */
+#endif /* CALCULOS_H_ */
