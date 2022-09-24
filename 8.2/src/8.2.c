@@ -14,54 +14,60 @@
 
 #include "calculos.h"
 
-
-
-
 int main(void) {
 	products apple[2];
 	int option = 0;
 
-	do{
+	do {
 
+		printf("\n Por favor, ingrese un numero \n \n "
+				"\n 1-ALTA Producto:"
+				"\n 2-BAJA Producto: "
+				"\n 3-MODIFICACIÓN Producto: "
+				"\n 4-LISTADO Productos. "
+				"\n 5-LISTADO ordenado por precio. "
+				"\n 6-LISTADO ordenado por descripción. "
+				"\n \n  7-EXIT: \n");
+		scanf("%d", &option);
 
-	printf("\n Por favor, ingrese un numero \n \n "
-			"\n 1-ALTA Producto:"
-			"\n 2-BAJA Producto: "
-			"\n 3-MODIFICACIÓN Producto: "
-			"\n 4-LISTADO Productos. "
-			"\n 5-LISTADO ordenado por precio. "
-			"\n 6-LISTADO ordenado por descripción. "
-			"\n \n  7-EXIT: \n");
-	scanf("%d", &option);
+		switch (option) {
+		case 1:
+			printf("\n Selecciono ALTA Producto: \n \n");
 
-	switch (option) {
-	case 1:
-		printf("\n Selecciono ALTA Producto: \n \n");
+			if (eGen_Alta(apple, 2)) {
+				puts("Dado de alta exitosamente");
+			} else {
+				puts("error sin espacio de almacenamiento");
+			}
+			break;
+		case 2:
+			printf("\n \n Selecciono BAJA Producto:  \n \n");
 
+			break;
+		case 3:
+			printf("\n \n Selecciono MODIFICACIÓN Producto: \n \n");
 
-		loadProduct(apple, 2);
-		break;
-	case 2:
-		printf("\n \n Selecciono BAJA Producto:  \n \n");
+			break;
+		case 4:
+			printf("\n \n Selecciono LISTADO Productos. \n \n");
 
-		break;
-	case 3:
-		printf("\n \n Selecciono MODIFICACIÓN Producto: \n \n");
+			//LISTADO Producto
+			if (eGen_MostrarTodos(apple, 1000)) {
+				system("pause");
+			} else {
+				puts("No hay nada para mostrar pa");
+			}
 
-		break;
-	case 4:
-		printf("\n \n Selecciono LISTADO Productos. \n \n");
-
-		break;
-	case 5:
-		printf("\n \n Selecciono LISTADO ordenado por precio. \n \n");
-		fflush(stdin);
-		break;
-	case 6:
-		printf("\n \n Selecciono LISTADO ordenado por descripción. \n \n");
-		fflush(stdin);
-		break;
-	}
-	}while(option != 7);
+			break;
+		case 5:
+			printf("\n \n Selecciono LISTADO ordenado por precio. \n \n");
+			fflush(stdin);
+			break;
+		case 6:
+			printf("\n \n Selecciono LISTADO ordenado por descripción. \n \n");
+			fflush(stdin);
+			break;
+		}
+	} while (option != 7);
 	return EXIT_SUCCESS;
 }

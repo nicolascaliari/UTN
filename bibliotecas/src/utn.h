@@ -15,7 +15,7 @@ int getFloat(float* pResultado);
 int esFlotante(char* cadena);
 int utn_getNumeroFlotante(float* pResultado, char* mensaje, char* mensajeError, float minimo, float maximo, int reintentos);
 int getString(char* cadena, int longitud);
-
+int utn_getDescripcion(char* pResultado, int longitud,char* mensaje, char* mensajeError, int reintentos);
 
 
 
