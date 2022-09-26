@@ -16,6 +16,7 @@
 
 int main(void) {
 	products apple[2];
+	initDatos(apple, 2);
 	int option = 0;
 
 	do {
@@ -42,6 +43,12 @@ int main(void) {
 			break;
 		case 2:
 			printf("\n \n Selecciono BAJA Producto:  \n \n");
+			if (eGen_Baja(apple, 2)) {
+				puts("\n * BAJA DE Gen EXITOSA");
+				eGen_MostrarTodos(apple, 2);
+			} else {
+				puts("\n * BAJA DE Gen CANCELADA");
+			}
 
 			break;
 		case 3:

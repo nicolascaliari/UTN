@@ -86,7 +86,7 @@ int eGen_Alta(products array[], int TAM) {
 		printf("Ingrese precio: \n");
 		__fpurge(stdin);
 		scanf("%f", &apple.price);
-		apple = eGen_CargarDatos();
+//		apple = eGen_CargarDatos();
 		//SETEO ID UNICO - VARIABLE ESTATICA AUTOINCREMENTAL
 		apple.idProduct = eGen_ObtenerID();
 		//CAMBIO SU ESTADO A "OCUPADO"
