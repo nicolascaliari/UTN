@@ -5,16 +5,13 @@
 #include "utn.h"
 
 
-
-static const char TXT_TIPOS[2][4]={"LCD","LED"};
-
 /**
  * \brief Imprime los datos de un cliente
  * \param pElemento Puntero al producto que se busca imprimir
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_imprimir(Pantalla* pElemento)
+int pan_imprimir(Product* pElemento)
 {
 	int retorno=-1;
 	char cadenaTipo[32];
@@ -22,17 +19,17 @@ int pan_imprimir(Pantalla* pElemento)
 	{
 		retorno=0;
 		//cargarTxtTipo(pElemento,cadenaTipo);
-		switch(pElemento->tipo)
-		{
-			case TIPO_LCD:
-				strncpy(cadenaTipo,"LCD",32);
-				break;
-			case TIPO_LED:
-				strncpy(cadenaTipo,"LED",32);
-				break;
-		}
-		printf("\nID: %d - %s - %s - %.2f - %s",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio,cadenaTipo);
-		printf("\nID: %d - %s - %s - %.2f - %s",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio,TXT_TIPOS[pElemento->tipo]);
+//		switch(pElemento->tipo)
+//		{
+//			case TIPO_LCD:
+//				strncpy(cadenaTipo,"LCD",32);
+//				break;
+//			case TIPO_LED:
+//				strncpy(cadenaTipo,"LED",32);
+//				break;
+//		}
+		printf("\nID: %d - %s - %s - %.2f",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio);//,cadenaTipo);
+	//	printf("\nID: %d - %s - %s - %.2f",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio);//,TXT_TIPOS[pElemento->tipo]);
 	}
 	return retorno;
 }
@@ -44,7 +41,7 @@ int pan_imprimir(Pantalla* pElemento)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_imprimirArray(Pantalla* array,int limite)
+int pan_imprimirArray(Product* array,int limite)
 {
 	int respuesta = -1;
 	int i;
@@ -66,7 +63,7 @@ int pan_imprimirArray(Pantalla* array,int limite)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_inicializarArray(Pantalla* array,int limite)
+int pan_inicializarArray(Product* array,int limite)
 {
 	int respuesta = -1;
 	int i;
@@ -90,17 +87,17 @@ int pan_inicializarArray(Pantalla* array,int limite)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_altaArray(Pantalla* array,int limite, int indice, int* id)
+int pan_altaArray(Product* array,int limite, int indice, int* id)
 {
 	int respuesta = -1;
-	Pantalla bufferPantalla;
+	Product bufferPantalla;
 
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && id != NULL)
 	{
 		if(	utn_getNombre(bufferPantalla.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
-			utn_getDescripcion(bufferPantalla.direccion,DIRECCION_LEN,"\nDireccion?\n","\nERROR\n",2) == 0 &&
-			utn_getNumeroFlotante(&bufferPantalla.precio,"\nPrecio?\n","\nERROR\n",0,10000,2) == 0 &&
-			utn_getNumero(&bufferPantalla.tipo,"Ingrese tipo [0:LCD 1:LED]:","No!",0,1,2)==0)
+			utn_getDescripcion(bufferPantalla.descripcion,DESCRIPCION,"\nDireccion?\n","\nERROR\n",2) == 0 &&
+			utn_getNumeroFlotante(&bufferPantalla.precio,"\nPrecio?\n","\nERROR\n",0,10000,2) == 0) //&&
+//			utn_getNumero(&bufferPantalla.tipo,"Ingrese tipo [0:LCD 1:LED]:","No!",0,1,2)==0)
 		{
 			respuesta = 0;
 			bufferPantalla.id = *id;
@@ -120,15 +117,15 @@ int pan_altaArray(Pantalla* array,int limite, int indice, int* id)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_modificarArray(Pantalla* array,int limite, int indice)
+int pan_modificarArray(Product* array,int limite, int indice)
 {
 	int respuesta = -1;
-	Pantalla bufferCliente;
+	Product bufferCliente;
 
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && array[indice].isEmpty == 0)
 	{
 		if(	utn_getNombre(bufferCliente.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
-			utn_getDni(bufferCliente.direccion,DIRECCION_LEN,"\nDNI?\n","\nERROR\n",2) == 0 &&
+			utn_getDni(bufferCliente.descripcion,DESCRIPCION,"\nDNI?\n","\nERROR\n",2) == 0 &&
 			utn_getNumeroFlotante(&bufferCliente.precio,"\nAltura?\n","\nERROR\n",0,5,2) == 0)
 		{
 			respuesta = 0;
@@ -148,7 +145,7 @@ int pan_modificarArray(Pantalla* array,int limite, int indice)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_bajaArray(Pantalla* array,int limite, int indice)
+int pan_bajaArray(Product* array,int limite, int indice)
 {
 	int respuesta = -1;
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && array[indice].isEmpty == 0)
@@ -167,7 +164,7 @@ int pan_bajaArray(Pantalla* array,int limite, int indice)
 * \return int Return (-1) si no encuentra el valor buscado o Error [Invalid length or NULL pointer] - (0) si encuentra el valor buscado
 *
 */
-int pan_buscarId(Pantalla array[], int limite, int valorBuscado)
+int pan_buscarId(Product array[], int limite, int valorBuscado)
 {
 	int respuesta = -1;
 	int i;
@@ -193,7 +190,7 @@ int pan_buscarId(Pantalla array[], int limite, int valorBuscado)
  * \return Retorna el incice de la posicion vacia y -1 (ERROR)
  *
  */
-int pan_getEmptyIndex(Pantalla* array,int limite)
+int pan_getEmptyIndex(Product* array,int limite)
 {
 	int respuesta = -1;
 	int i;
@@ -219,12 +216,12 @@ int pan_getEmptyIndex(Pantalla* array,int limite)
  * \return Retorna el incice de la posicion vacia y -1 (ERROR)
  *
  */
-int pan_ordenarPorNombre(Pantalla* array,int limite)
+int pan_ordenarPorNombre(Product* array,int limite)
 {
 	int respuesta = -1;
 	int flagSwap;
 	int i;
-	Pantalla buffer;
+	Product buffer;
 	if(array != NULL && limite > 0)
 	{
 		do
@@ -258,12 +255,12 @@ int pan_ordenarPorNombre(Pantalla* array,int limite)
  * \return Retorna el incice de la posicion vacia y -1 (ERROR)
  *
  */
-int pan_ordenarPorNombrePrecio(Pantalla* array,int limite)
+int pan_ordenarPorNombrePrecio(Product* array,int limite)
 {
 	int respuesta = -1;
 	int flagSwap;
 	int i;
-	Pantalla buffer;
+	Product buffer;
 	int auxiliarCmp;
 	if(array != NULL && limite > 0)
 	{

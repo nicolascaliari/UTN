@@ -11,7 +11,7 @@ int main(void) {
 #define CANTIDAD_CONTRATACIONES 1000
 
 //	Contratacion arraysContrataciones[CANTIDAD_CONTRATACIONES];
-	Pantalla arrayPantallas[CANTIDAD_PANTALLAS];
+	Product arrayPantallas[CANTIDAD_PANTALLAS];
 	int idPantallas=0;
 	int idContrataciones=0;
 	int opcion;
@@ -58,7 +58,7 @@ int main(void) {
 				break;
 			case 2:
 				pan_imprimirArray(arrayPantallas,CANTIDAD_PANTALLAS);
-				if(utn_getNumero(&auxiliarId,"\nIndique el ID del cliente a modificar","\nID invalido",0,5,0) == 0)
+				if(utn_getNumero(&auxiliarId,"\nIndique el ID del cliente a modificar","\nID invalido",0,5,5) == 0)
 				{
 					auxiliarIndice = pan_buscarId(arrayPantallas,CANTIDAD_PANTALLAS,auxiliarId);
 					if(	auxiliarIndice >= 0 &&

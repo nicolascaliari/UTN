@@ -2,6 +2,8 @@
 #include <stdlib.h>
 #include <string.h>
 
+//Validar numeros enteros ----------------------------------------------------------------
+
 int esNumerica(char cadena[]) {
 	int i;
 	int retorno = 1;
@@ -55,6 +57,10 @@ int utn_getNumero(int *pResultado, char *mensaje, char *mensajeError,
 	}
 	return ret;
 }
+
+
+//Validar numeros flotantes ----------------------------------------------------------------
+
 
 int getFloat(float *pResultado) {
 	int retorno = -1;
@@ -134,7 +140,7 @@ int getString(char *cadena, int longitud) {
 
 
 
-
+// Validar descripcion ---------------------------------------------------------------------
 
 static int getDescripcion(char* pResultado, int longitud)
 {
