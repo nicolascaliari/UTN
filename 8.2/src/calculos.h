@@ -7,28 +7,30 @@
 
 #ifndef CALCULOS_H_
 #define CALCULOS_H_
-typedef struct{
-	int idProduct;
-	char description[20];
-	int nation;
-	int type;
-	float price;
+#define NOMBRE_LEN 50
+#define DIRECCION_LEN 20
+
+#define TIPO_LCD	0
+#define TIPO_LED	1
+
+typedef struct
+{
+	char nombre[NOMBRE_LEN];
+	char direccion[DIRECCION_LEN];
+	float precio;
 	int isEmpty;
-}products;
+	int id;
+	int tipo; // agregado!
+}Pantalla;
 
-void initDatos(products apple[], int len);
-int deleteDatos(products apple[], int len);
-int encontrarId(products apple[], int len);
-void cargarProducto(products apple[], int len);
-
-
-
-int eGen_Alta(products array[], int TAM);
-products eGen_CargarDatos(void);
-static int eGen_ObtenerID(void);
-static int eGen_ObtenerID(void);
-
-int eGen_MostrarTodos(products array[], int TAM);
-void eGen_MostrarUno(products Gen);
+int pan_imprimir(Pantalla* auxProducto);
+int pan_inicializarArray(Pantalla* array,int limite);
+int pan_altaArray(Pantalla* array,int limite, int indice, int* id);
+int pan_getEmptyIndex(Pantalla* array,int limite);
+int pan_imprimirArray(Pantalla* array,int limite);
+int pan_buscarId(Pantalla array[], int limite, int valorBuscado);
+int pan_modificarArray(Pantalla* array,int limite, int indice);
+int pan_bajaArray(Pantalla* array,int limite, int indice);
+int pan_ordenarPorNombre(Pantalla* array,int limite);
 
 #endif /* CALCULOS_H_ */
