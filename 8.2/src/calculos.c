@@ -14,22 +14,10 @@
 int pan_imprimir(Product* pElemento)
 {
 	int retorno=-1;
-	char cadenaTipo[32];
 	if(pElemento != NULL && pElemento->isEmpty == 0)
 	{
 		retorno=0;
-		//cargarTxtTipo(pElemento,cadenaTipo);
-//		switch(pElemento->tipo)
-//		{
-//			case TIPO_LCD:
-//				strncpy(cadenaTipo,"LCD",32);
-//				break;
-//			case TIPO_LED:
-//				strncpy(cadenaTipo,"LED",32);
-//				break;
-//		}
-		printf("\nID: %d - %s - %s - %.2f",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio);//,cadenaTipo);
-	//	printf("\nID: %d - %s - %s - %.2f",pElemento->id,pElemento->nombre,pElemento->direccion,pElemento->precio);//,TXT_TIPOS[pElemento->tipo]);
+		printf("\nID: %d - %s - %s - %.2f",pElemento->id,pElemento->nombre,pElemento->descripcion,pElemento->precio);
 	}
 	return retorno;
 }
@@ -95,7 +83,7 @@ int pan_altaArray(Product* array,int limite, int indice, int* id)
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && id != NULL)
 	{
 		if(	utn_getNombre(bufferPantalla.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
-			utn_getDescripcion(bufferPantalla.descripcion,DESCRIPCION,"\nDireccion?\n","\nERROR\n",2) == 0 &&
+			utn_getDescripcion(bufferPantalla.descripcion,DESCRIPCION,"\nDescripcion?\n","\nERROR\n",2) == 0 &&
 			utn_getNumeroFlotante(&bufferPantalla.precio,"\nPrecio?\n","\nERROR\n",0,10000,2) == 0) //&&
 //			utn_getNumero(&bufferPantalla.tipo,"Ingrese tipo [0:LCD 1:LED]:","No!",0,1,2)==0)
 		{
@@ -120,18 +108,19 @@ int pan_altaArray(Product* array,int limite, int indice, int* id)
 int pan_modificarArray(Product* array,int limite, int indice)
 {
 	int respuesta = -1;
-	Product bufferCliente;
+	Product bufferProduct;
 
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && array[indice].isEmpty == 0)
 	{
-		if(	utn_getNombre(bufferCliente.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
-			utn_getDni(bufferCliente.descripcion,DESCRIPCION,"\nDNI?\n","\nERROR\n",2) == 0 &&
-			utn_getNumeroFlotante(&bufferCliente.precio,"\nAltura?\n","\nERROR\n",0,5,2) == 0)
+		if(	utn_getNombre(bufferProduct.nombre,NOMBRE_LEN,"\nNombre?\n","\nERROR\n",2) == 0 &&
+			utn_getDescripcion(bufferProduct.descripcion,DESCRIPCION,"\nDescripcion?\n","\nERROR\n",2) == 0 &&
+			utn_getNumeroFlotante(&bufferProduct.precio,"\nPrecio?\n","\nERROR\n",0,10000,2) == 0) //&&
+//			utn_getNumero(&bufferPantalla.tipo,"Ingrese tipo [0:LCD 1:LED]:","No!",0,1,2)==0)
 		{
 			respuesta = 0;
-			bufferCliente.id = array[indice].id;
-			bufferCliente.isEmpty = 0;
-			array[indice] = bufferCliente;
+			bufferProduct.id = array[indice].id;
+			bufferProduct.isEmpty = 0;
+			array[indice] = bufferProduct;
 		}
 	}
 	return respuesta;
@@ -216,7 +205,7 @@ int pan_getEmptyIndex(Product* array,int limite)
  * \return Retorna el incice de la posicion vacia y -1 (ERROR)
  *
  */
-int pan_ordenarPorNombre(Product* array,int limite)
+int pan_ordenarPorDescripcion(Product* array,int limite)
 {
 	int respuesta = -1;
 	int flagSwap;
@@ -233,7 +222,7 @@ int pan_ordenarPorNombre(Product* array,int limite)
 				{
 					continue;
 				}
-				if(strncmp(array[i].nombre,array[i+1].nombre,NOMBRE_LEN) > 0)
+				if(strncmp(array[i].descripcion,array[i+1].descripcion,NOMBRE_LEN) > 0)
 				{
 					flagSwap = 1;
 					buffer = array[i];
@@ -248,67 +237,30 @@ int pan_ordenarPorNombre(Product* array,int limite)
 }
 
 
-/**
- * \brief Ordenar el array de clientes por nombre y altura
- * \param array Array de clientes
- * \param limite Limite del array de clientes
- * \return Retorna el incice de la posicion vacia y -1 (ERROR)
- *
- */
-int pan_ordenarPorNombrePrecio(Product* array,int limite)
+int OrdenaArrayInt(Product* array,int limite)
 {
-	int respuesta = -1;
-	int flagSwap;
-	int i;
-	Product buffer;
-	int auxiliarCmp;
-	if(array != NULL && limite > 0)
-	{
-		do
-		{
-			flagSwap = 0;
-			for(i=0;i<limite-1;i++)
-			{
-/*
-				if(array[i].isEmpty || array[i+1].isEmpty)
-				{
-					continue;
-				}
-				if(strncmp(array[i].nombre,array[i+1].nombre,NOMBRE_LEN) > 0)
-				{
-					flagSwap = 1;
-					buffer = array[i];
-					array[i] = array[i+1];
-					array[i+1]=buffer;
-				}
-				else if(strncmp(array[i].nombre,array[i+1].nombre,NOMBRE_LEN) == 0)
-				{
-					if(array[i].altura < array[i+1].altura)
-					{
-						flagSwap = 1;
-						buffer = array[i];
-						array[i] = array[i+1];
-						array[i+1]=buffer;
-					}
-				}
-*/
-				if(array[i].isEmpty || array[i+1].isEmpty)
-				{
-					continue;
-				}
-				auxiliarCmp = strncmp(array[i].nombre,array[i+1].nombre,NOMBRE_LEN);
-				if(	 auxiliarCmp > 0 ||
-					(auxiliarCmp == 0 && array[i].precio < array[i+1].precio) )
-				{
-					flagSwap = 1;
-					buffer = array[i];
-					array[i] = array[i+1];
-					array[i+1]=buffer;
-				}
-			}
-			limite--;
-		}while(flagSwap);
-	}
-	return respuesta;
+   int flagSwap;
+   int i;
+   int contador = 0;
+   int retorno = -1;
+   Product buffer;
+
+   if(array != NULL && limite > 0){
+	   do{
+		   flagSwap=0;
+		   for(i=0; i<limite-1;i++){
+			   if(array[i].precio < array[i+1].precio){
+				   flagSwap = 1;
+				   buffer = array[i];
+				   array[i] = array[i+1];
+				   array[i+1] = buffer;
+			   }
+			   contador++;
+		   }
+	   }while(flagSwap);
+	   retorno = contador;
+   }
+   return retorno;
 }
+
 

@@ -31,6 +31,7 @@ int pan_imprimirArray(Product* array,int limite);
 int pan_buscarId(Product array[], int limite, int valorBuscado);
 int pan_modificarArray(Product* array,int limite, int indice);
 int pan_bajaArray(Product* array,int limite, int indice);
-int pan_ordenarPorNombre(Product* array,int limite);
+int pan_ordenarPorDescripcion(Product* array,int limite);
+int OrdenaArrayInt(Product* pArray,int limite);
 
 #endif /* CALCULOS_H_ */

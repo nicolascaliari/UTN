@@ -17,6 +17,7 @@ int main(void) {
 	int opcion;
 	int auxiliarIndice;
 	int auxiliarId;
+	float respuesta;
 
 	if(pan_inicializarArray(arrayPantallas,CANTIDAD_PANTALLAS) == 0)
 	{
@@ -34,9 +35,9 @@ int main(void) {
 							"\n\n1.Cargar una pantalla"
 							"\n2.Modificar una pantalla"
 							"\n3.Eliminar una pantalla"
-							"\n4.-"
-							"\n5.Imprimir lista pantalla"
-							"\n4.-"
+							"\n4.-Listar productos"
+							"\n5.Listado ordenado por precio"
+							"\n6.-Listado ordenado por descripcion"
 							"\n7.Salir\n\n",
 							"\nError opcion invalida",1,7,2) )
 		{
@@ -58,7 +59,7 @@ int main(void) {
 				break;
 			case 2:
 				pan_imprimirArray(arrayPantallas,CANTIDAD_PANTALLAS);
-				if(utn_getNumero(&auxiliarId,"\nIndique el ID del cliente a modificar","\nID invalido",0,5,5) == 0)
+				if(utn_getNumero(&auxiliarId,"\nIndique el ID del cliente a modificar","\nID invalido",0,idPantallas,5) == 0)
 				{
 					auxiliarIndice = pan_buscarId(arrayPantallas,CANTIDAD_PANTALLAS,auxiliarId);
 					if(	auxiliarIndice >= 0 &&
@@ -71,7 +72,7 @@ int main(void) {
 
 			case 3:
 				pan_imprimirArray(arrayPantallas,CANTIDAD_PANTALLAS);
-				if(utn_getNumero(&auxiliarId,"\nIndique el ID del cliente a eliminar","\nID invalido",0,idPantallas,0)==0)
+				if(utn_getNumero(&auxiliarId,"\nIndique el ID del cliente a eliminar","\nID invalido",0,idPantallas,5)==0)
 				{
 					auxiliarIndice = pan_buscarId(arrayPantallas,CANTIDAD_PANTALLAS,auxiliarId);
 					if(	auxiliarIndice >= 0 &&
@@ -82,15 +83,21 @@ int main(void) {
 				}
 				break;
 			case 4:
-				pan_ordenarPorNombre(arrayPantallas,CANTIDAD_PANTALLAS);
+				pan_imprimirArray(arrayPantallas,CANTIDAD_PANTALLAS);
+
 				break;
 
 			case 5:
-				pan_imprimirArray(arrayPantallas,CANTIDAD_PANTALLAS);
+				respuesta = OrdenaArrayInt(arrayPantallas, CANTIDAD_PANTALLAS);
+
+				if(respuesta > 0){
+					printf("\n %f" , respuesta);
+				}
+//				pan_imprimirArray(arrayPantallas,CANTIDAD_PANTALLAS);
 				break;
 
 			case 6:
-				pan_ordenarPorNombre(arrayPantallas,CANTIDAD_PANTALLAS);
+				pan_ordenarPorDescripcion(arrayPantallas, CANTIDAD_PANTALLAS);
 				break;
 
 			}
