@@ -10,8 +10,6 @@
 #define NOMBRE_LEN 50
 #define DESCRIPCION 20
 
-#define TIPO_LCD	0
-#define TIPO_LED	1
 
 typedef struct
 {
@@ -20,18 +18,18 @@ typedef struct
 	float precio;
 	int isEmpty;
 	int id;
-	int tipo; // agregado!
+	int tipo;
 }Product;
 
-int pan_imprimir(Product* auxProducto);
-int pan_inicializarArray(Product* array,int limite);
-int pan_altaArray(Product* array,int limite, int indice, int* id);
-int pan_getEmptyIndex(Product* array,int limite);
-int pan_imprimirArray(Product* array,int limite);
-int pan_buscarId(Product array[], int limite, int valorBuscado);
-int pan_modificarArray(Product* array,int limite, int indice);
-int pan_bajaArray(Product* array,int limite, int indice);
-int pan_ordenarPorDescripcion(Product* array,int limite);
-int OrdenaArrayInt(Product* pArray,int limite);
+int prod_imprimir(Product* auxProducto);
+int prod_inicializarArray(Product* array,int limite);
+int prod_altaArray(Product* array,int limite, int indice, int* id);
+int prod_getEmptyIndex(Product* array,int limite);
+int prod_imprimirArray(Product* array,int limite);
+int prod_buscarId(Product array[], int limite, int valorBuscado);
+int prod_modificarArray(Product* array,int limite, int indice);
+int prod_bajaArray(Product* array,int limite, int indice);
+int prod_ordenarPorDescripcion(Product* array,int limite);
+int OrdenaArrayInt(Product* array,int limite);
 
 #endif /* CALCULOS_H_ */

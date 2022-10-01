@@ -11,7 +11,7 @@
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_imprimir(Product* pElemento)
+int prod_imprimir(Product* pElemento)
 {
 	int retorno=-1;
 	if(pElemento != NULL && pElemento->isEmpty == 0)
@@ -29,7 +29,7 @@ int pan_imprimir(Product* pElemento)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_imprimirArray(Product* array,int limite)
+int prod_imprimirArray(Product* array,int limite)
 {
 	int respuesta = -1;
 	int i;
@@ -38,7 +38,7 @@ int pan_imprimirArray(Product* array,int limite)
 		respuesta = 0;
 		for(i=0;i<limite;i++)
 		{
-			pan_imprimir(&array[i]);
+			prod_imprimir(&array[i]);
 		}
 	}
 	return respuesta;
@@ -51,7 +51,7 @@ int pan_imprimirArray(Product* array,int limite)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_inicializarArray(Product* array,int limite)
+int prod_inicializarArray(Product* array,int limite)
 {
 	int respuesta = -1;
 	int i;
@@ -75,7 +75,7 @@ int pan_inicializarArray(Product* array,int limite)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_altaArray(Product* array,int limite, int indice, int* id)
+int prod_altaArray(Product* array,int limite, int indice, int* id)
 {
 	int respuesta = -1;
 	Product bufferPantalla;
@@ -105,7 +105,7 @@ int pan_altaArray(Product* array,int limite, int indice, int* id)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_modificarArray(Product* array,int limite, int indice)
+int prod_modificarArray(Product* array,int limite, int indice)
 {
 	int respuesta = -1;
 	Product bufferProduct;
@@ -134,7 +134,7 @@ int pan_modificarArray(Product* array,int limite, int indice)
  * \return Retorna 0 (EXITO) y -1 (ERROR)
  *
  */
-int pan_bajaArray(Product* array,int limite, int indice)
+int prod_bajaArray(Product* array,int limite, int indice)
 {
 	int respuesta = -1;
 	if(array != NULL && limite > 0 && indice < limite && indice >= 0 && array[indice].isEmpty == 0)
@@ -153,7 +153,7 @@ int pan_bajaArray(Product* array,int limite, int indice)
 * \return int Return (-1) si no encuentra el valor buscado o Error [Invalid length or NULL pointer] - (0) si encuentra el valor buscado
 *
 */
-int pan_buscarId(Product array[], int limite, int valorBuscado)
+int prod_buscarId(Product array[], int limite, int valorBuscado)
 {
 	int respuesta = -1;
 	int i;
@@ -179,7 +179,7 @@ int pan_buscarId(Product array[], int limite, int valorBuscado)
  * \return Retorna el incice de la posicion vacia y -1 (ERROR)
  *
  */
-int pan_getEmptyIndex(Product* array,int limite)
+int prod_getEmptyIndex(Product* array,int limite)
 {
 	int respuesta = -1;
 	int i;
@@ -205,7 +205,7 @@ int pan_getEmptyIndex(Product* array,int limite)
  * \return Retorna el incice de la posicion vacia y -1 (ERROR)
  *
  */
-int pan_ordenarPorDescripcion(Product* array,int limite)
+int prod_ordenarPorDescripcion(Product* array,int limite)
 {
 	int respuesta = -1;
 	int flagSwap;
