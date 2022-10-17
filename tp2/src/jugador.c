@@ -51,7 +51,7 @@ int jugador_imprimir(eJugador unJugador)
 	{
 //			printf("ID	|     NOMBRE	|  POSICION	|  NUMERO DE CAMISETA	|   SALARIO	|  ANIOS DE CONTRARO\n");
 
-			printf("%d	|      %s	|    %s	|       %d		|      %2.f	|    %d\n",
+			printf("ID:%d   NOMBRE:%s  POSICION:%s  NUMERO DE CAMISETA:%d  SALARIO:%2.f  ANIOS DE CONTRARO:%d\n\n",
 					unJugador.id, unJugador.nombre, unJugador.posicion,
 					unJugador.numeroCamiseta, unJugador.salario,
 					unJugador.aniosContrato);
@@ -106,9 +106,10 @@ int alta_jugador(eJugador arrayJugador[], int limiteJugador)
 					&& utn_getNumeroShort(&auxiliar.numeroCamiseta,"Ingrese su numero de camiseta", "error", 1, 90, 2)== 0
 					&& utn_getNumeroFlotante(&auxiliar.salario,"Ingrese su salario", "error", 1, 600000, 2) == 0
 					&& utn_getNumeroShort(&auxiliar.aniosContrato,"Ingrese anios de contrato", "error", 1, 50, 2) == 0)
+
 			{
-				auxiliar.id = idJugador();
 				auxiliar.isEmpty = 1;
+				auxiliar.id = idJugador();
 				arrayJugador[indice] = auxiliar;
 				retorno = 0;
 			}
@@ -125,12 +126,13 @@ int jugador_bajaArray(eJugador arrayJugador[], int limiteJugador) {
 
 	if (arrayJugador != NULL && limiteJugador > 0)
 	{
-		if (utn_getNumero(&id, "Ingrese el ID que desea modificar","Error al ingresar id", 1, 20, 10000) == 0) {
+		jugador_imprimirArray(arrayJugador, limiteJugador);
+		if (utn_getNumero(&id, "Ingrese el ID que desea dar de baja","Error al ingresar id", 1, 20, 10000) == 0) {
 
 			while (recurso_buscarId(arrayJugador, limiteJugador, id) == -1)
 			{
 				puts("NO EXISTE ID.");
-				utn_getNumero(&id, "Ingrese el ID que desea modificar","Error al ingresar id", 1, 20, 10000);
+				utn_getNumero(&id, "Ingrese el ID que desea dar de baja","Error al ingresar id", 1, 20, 10000);
 			}
 
 			indice = recurso_buscarId(arrayJugador, limiteJugador, id);
@@ -153,7 +155,7 @@ int recurso_modificarRecurso(eJugador arrayJugador[], int limiteJugador)
 	if (arrayJugador != NULL && limiteJugador > 0)
 	{
 
-//		recurso_imprimirArray(arrayRecurso, arrayTipo, limiteRecurso,limiteTipo);
+		jugador_imprimirArray(arrayJugador, limiteJugador);
 
 		if (utn_getNumero(&id, "Ingrese el ID que desea modificar",
 				"Error al ingresar id", 0, 20, 3) == 0) {
@@ -171,21 +173,34 @@ int recurso_modificarRecurso(eJugador arrayJugador[], int limiteJugador)
 			{
 
 				if (utn_getNumero(&opcion, "\nMenu para modificar recurso"
-						"\n\n1.Ingrese 1 para modificar precio por hora"
-						"\n2.Ingrese 2 para modificar la descripcion",
-						"\nError opcion invalida", 1, 2, 10000) == 0)
+						"\n\n1.Ingrese 1 para modificar nombre del jugador"
+						"\n2.Ingrese 2 para modificar la posicion del jugador"
+						"\n3.Ingrese 3 para modificar el numero de camiseta"
+						"\n4.Ingrese 4 para modificar el salario"
+						"\n5.Ingrese 5 para modificar los anios de contrato",
+						"\nError opcion invalida", 1, 5, 2) == 0)
 				{
 					switch (opcion)
 					{
 					case 1:
-						utn_getNumeroFlotante(&arrayJugador[indice].salario,
-								"\nPrecio?\n", "\nERROR\n", 1, 10000, 100000);
+						utn_getDescripcion(arrayJugador[indice].nombre, 50,"\nIngrese el nuevo nombre\n", "\nERROR\n", 1000000);
 						retorno = 0;
 						break;
 					case 2:
-						utn_getDescripcion(arrayJugador[indice].nombre, 50,
-								"\nDescripcion?\n", "\nERROR\n", 1000000);
+						utn_getDescripcion(arrayJugador[indice].posicion, 50,"\nIngrese la posicion a modificar\n", "\nERROR\n", 1000000);
 						retorno = 0;
+						break;
+					case 3:
+						 utn_getNumeroShort(&arrayJugador[indice].numeroCamiseta,"Ingrese su numero de camiseta nuevo", "error", 1, 90, 2);
+						 retorno = 0;
+						 break;
+					case 4:
+						utn_getNumeroFlotante(&arrayJugador[indice].salario,"\nIngrese el nuevo salario\n", "\nERROR\n", 1, 10000, 100000);
+						retorno = 0;
+						break;
+					case 5:
+						 utn_getNumeroShort(&arrayJugador[indice].aniosContrato,"Ingrese su numero de camiseta", "error", 1, 90, 2);
+						 retorno = 0;
 						break;
 					}
 
@@ -216,12 +231,34 @@ int buscarEspacioLibre(eJugador arrayJugador[], int limiteJugador)
 {
 	int i;
 	int retorno = -1;
+	if(arrayJugador != NULL && limiteJugador > 0){
 	for (i = 0; i < limiteJugador; i++)
 	{
 		if (arrayJugador[i].isEmpty == 0)
 		{
 			retorno = i;
 			break;
+			}
+		}
+	}
+	return retorno;
+}
+
+
+
+/**
+*\brief: Verifica que haya espacio para cargar un nuevo dato de tipo transporte.
+*\param: Array de tipo transporte, Longitud del array.
+*\return: Retorna 1 si encuentra espacio, Retorna 0 si no lo encuentra.
+**/
+int buscarEspacio(eJugador arrayJugador[], int limiteJugador){
+	int retorno = 0;
+	if(arrayJugador != NULL && limiteJugador > 0){
+		for(int i = 0; i < limiteJugador; i++){
+
+			if(arrayJugador[i].isEmpty == 0){
+				retorno = 1;
+			}
 		}
 	}
 	return retorno;

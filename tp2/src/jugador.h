@@ -28,5 +28,6 @@ int jugador_bajaArray(eJugador arrayJugador[], int limiteJugador);
 int recurso_modificarRecurso(eJugador arrayJugador[], int limiteJugador);
 int buscarEspacioLibre(eJugador arrayJugador[], int limiteJugador);
 int recurso_buscarId(eJugador arrayJugador[], int limiteJugador, int valorBuscado);
+int buscarEspacio(eJugador arrayJugador[], int limiteJugador);
 
 #endif /* JUGADOR_H_ */

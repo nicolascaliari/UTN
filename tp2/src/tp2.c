@@ -19,6 +19,8 @@
 int main(void) {
 
 eJugador arrayJugadores[CANTIDAD_JUGADOR];
+inicializar_array(arrayJugadores, CANTIDAD_JUGADOR);
+
 	menu(arrayJugadores, CANTIDAD_JUGADOR);
 
 	return EXIT_SUCCESS;

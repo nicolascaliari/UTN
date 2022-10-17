@@ -3,36 +3,73 @@
 #include "utn.h"
 #include "jugador.h"
 
-
-void menu(eJugador unJugador[], int limiteJugador){
+void menu(eJugador arrayJugador[], int limiteJugador) {
 	int opcion;
+	int bandera = 0;
+	int contador = 0;
 
-	do{
-		if(utn_getNumero(&opcion, "\n         Bienvenido al menu\n"
-								  "\n1-Alta de jugador"
-								  "\n2-Baja de jugador"
-								  "\n3-Modificacion de jugador"
-								  "\n4-Informes"
-								  "\n5-Salir",
-								  "\nError, solo puede ingresar del 1 al 5", 1, 5, 2) == 0){
-			switch(opcion){
+	do {
+		if (utn_getNumero(&opcion, "\n         Bienvenido al menu\n"
+				"\n1-Alta de jugador"
+				"\n2-Baja de jugador"
+				"\n3-Modificacion de jugador"
+				"\n4-Informes"
+				"\n5-Salir", "\nError, solo puede ingresar del 1 al 5", 1, 5, 2)
+				== 0) {
+
+			switch (opcion)
+			{
 			case 1:
-				inicializar_array(unJugador, limiteJugador);
-				alta_jugador(unJugador, limiteJugador);
+				if(buscarEspacio(arrayJugador, limiteJugador) == 1)
+				{
+					if(alta_jugador(arrayJugador, limiteJugador) == 0)
+					{
+						printf("Dado de alta exitosamente");
+						bandera = 1;
+						contador++;
+					}
+					else
+					{
+						printf("No se pudo dar de alta");
+					}
+				}
+				else
+				{
+					printf("No hay mas espacio");
+				}
+
 				break;
 			case 2:
-				jugador_bajaArray(unJugador, limiteJugador);
+				if(bandera == 1 && jugador_bajaArray(arrayJugador, limiteJugador) == 0)
+				{
+					printf("Dado de baja exitosamente");
+					contador--;
+					if(contador == 0)
+					{
+						bandera = 0;
+					}
+				}
+				else
+				{
+					printf("No se pudo dar de baja");
+				}
 				break;
 			case 3:
-				recurso_modificarRecurso(unJugador, limiteJugador);
+				if(bandera == 1 && recurso_modificarRecurso(arrayJugador, limiteJugador) == 0)
+				{
+					printf("Modificacion exitosa");
+				}
+				else
+				{
+					printf("No se pudo realizar la modificacion");
+				}
 				break;
 			case 4:
-				jugador_imprimirArray(unJugador, limiteJugador);
+				jugador_imprimirArray(arrayJugador, limiteJugador);
 				break;
 			}
 
 		}
 
-
-	}while(opcion != 5);
+	} while (opcion != 5);
 }
