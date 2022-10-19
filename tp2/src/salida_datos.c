@@ -2,8 +2,10 @@
 #include <stdlib.h>
 #include "utn.h"
 #include "jugador.h"
+#include "confederacion.h"
 
-void menu(eJugador arrayJugador[], int limiteJugador) {
+
+void menu(eJugador arrayJugador[], int limiteJugador , eConfederacion arrayConfederacion[], int limiteConfederacion) {
 	int opcion;
 	int bandera = 0;
 	int contador = 0;
@@ -22,7 +24,7 @@ void menu(eJugador arrayJugador[], int limiteJugador) {
 			case 1:
 				if(buscarEspacio(arrayJugador, limiteJugador) == 1)
 				{
-					if(alta_jugador(arrayJugador, limiteJugador) == 0)
+					if(alta_jugador(arrayJugador, limiteJugador, arrayConfederacion, limiteConfederacion) == 0)
 					{
 						printf("Dado de alta exitosamente");
 						bandera = 1;
@@ -65,7 +67,10 @@ void menu(eJugador arrayJugador[], int limiteJugador) {
 				}
 				break;
 			case 4:
-				jugador_imprimirArray(arrayJugador, limiteJugador);
+				menuInformes(arrayJugador,limiteJugador, arrayConfederacion, limiteConfederacion);
+				break;
+			case 5:
+				jugador_imprimirArray(arrayJugador, limiteJugador, arrayConfederacion, limiteConfederacion);
 				break;
 			}
 

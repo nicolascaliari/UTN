@@ -7,6 +7,7 @@
 
 #ifndef JUGADOR_H_
 #define JUGADOR_H_
+#include "confederacion.h"
 
 typedef struct{
 	int id;
@@ -21,9 +22,9 @@ typedef struct{
 
 
 void inicializar_array(eJugador unJugador[], int limiteJugador);
-int jugador_imprimir(eJugador unJugador);
-int jugador_imprimirArray(eJugador arrayJugador[], int limiteJugador);
-int alta_jugador(eJugador arrayJugador[], int limiteJugador);
+int jugador_imprimir(eJugador unJugador, eConfederacion arrayConfederacion[],int limiteConfederacion);
+int jugador_imprimirArray(eJugador arrayJugador[], int limiteJugador, eConfederacion arrayConfederacion[], int limiteConfederacion);
+int alta_jugador(eJugador arrayJugador[], int limiteJugador, eConfederacion arrayConferacion[], int limiteConfederacion);
 int jugador_bajaArray(eJugador arrayJugador[], int limiteJugador);
 int recurso_modificarRecurso(eJugador arrayJugador[], int limiteJugador);
 int buscarEspacioLibre(eJugador arrayJugador[], int limiteJugador);

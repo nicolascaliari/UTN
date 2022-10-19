@@ -8,9 +8,10 @@
 #ifndef SALIDA_DATOS_H_
 #define SALIDA_DATOS_H_
 #include "jugador.h"
+#include "confederacion.h"
 
 
-void menu(eJugador unJugador[], int limiteJugador);
+void menu(eJugador arrayJugador[], int limiteJugador , eConfederacion arrayConfederacion[], int limiteConfederacion);
 
 
 #endif /* SALIDA_DATOS_H_ */
